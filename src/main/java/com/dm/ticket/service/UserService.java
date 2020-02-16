@@ -1,9 +1,9 @@
 package com.dm.ticket.service;
 
 
-import com.dm.ticket.model.dto.LoginDto;
-import com.dm.ticket.model.dto.RealInfoDto;
-import com.dm.ticket.model.dto.RegisterDto;
+import com.dm.ticket.model.dto.*;
+
+import java.util.Map;
 
 public interface UserService {
 
@@ -18,4 +18,14 @@ public interface UserService {
     boolean bindEmail(String email, Long id);
 
     boolean realVerified(RealInfoDto dto);
+
+    boolean changePhone(Long uid, String phone, String pwd);
+
+    boolean findPwd(String phone, String pwd);
+
+    boolean changePwd(Long uid, String oldPwd, String newPwd);
+
+    boolean changeInfo(UserInfoUpdateDto info);
+
+    UserInfoDto getUserInfo(Long uid);
 }
