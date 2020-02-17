@@ -70,7 +70,7 @@ public class ShipController extends BaseController {
     @ApiOperation("获取用户所有地址")
     public Object getShipList(@PathVariable Long uid){
         List<ShipDto> list = shipService.getShipList(uid);
-        if (!CollUtil.isEmpty(list)) {
+        if (list != null) {
            return list;
         }else {
             return errorResponse("获取失败");
