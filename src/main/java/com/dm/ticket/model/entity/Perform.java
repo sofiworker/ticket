@@ -2,14 +2,12 @@ package com.dm.ticket.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.validation.constraints.NotBlank;
 
 /**
  * @description 演出
@@ -19,7 +17,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Perform {
 
-    @JsonIgnore
     @Id
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
@@ -27,27 +24,17 @@ public class Perform {
     /**
      * 演出海报封面
      */
-    @Lob
     @Column(nullable = false)
-    @NotBlank
     private String cover;
 
     @Column(nullable = false)
-    @NotBlank
     private String title;
-
-    /**
-     * 演出时间id（1对n）
-     */
-    @Column(nullable = false)
-    private Long timeId;
 
     /**
      * 演出内容描述
      */
     @Lob
     @Column(nullable = false)
-    @NotBlank
     private String content;
 
     /**
@@ -55,7 +42,6 @@ public class Perform {
      */
     @Lob
     @Column(nullable = false)
-    @NotBlank
     private String ticketNotice;
 
     /**
@@ -63,7 +49,6 @@ public class Perform {
      */
     @Lob
     @Column(nullable = false)
-    @NotBlank
     private String viewNotice;
 
     /**
@@ -77,4 +62,22 @@ public class Perform {
      */
     @Column(nullable = false)
     private Integer subclassId;
+
+    /**
+     * 演出艺人id
+     */
+    @Column
+    private Integer artistId;
+
+    /**
+     * 城市id
+     */
+    @Column(nullable = false)
+    private Long cityId;
+
+    /**
+     * 具体地址id
+     */
+    @Column(nullable = false)
+    private Long locationId;
 }

@@ -1,7 +1,7 @@
 package com.dm.ticket.controller;
 
 import com.dm.ticket.model.StrResponseData;
-import com.dm.ticket.model.entity.Perform;
+import com.dm.ticket.model.dto.PerformDto;
 import com.dm.ticket.service.PerformService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/perform")
-@Api(produces = "application/json", tags = "演出控制器")
+@Api(produces = "application/json", tags = "演出")
 public class PerformController extends BaseController {
 
     private PerformService performService;
@@ -28,8 +28,8 @@ public class PerformController extends BaseController {
 
     @PostMapping("/add")
     @ApiOperation("新增演出")
-    public StrResponseData addShow(@Valid @RequestBody Perform perform) {
-        if (performService.addPerform()) {
+    public StrResponseData addShow(@Valid @RequestBody PerformDto dto) {
+        if (performService.addPerform(dto)) {
             return successResponse("新增成功");
         }else {
             return errorResponse("新增失败");

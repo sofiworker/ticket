@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/city")
-@Api(produces = "application/json", tags = "演出城市控制器")
+@Api(produces = "application/json", tags = "演出城市")
 public class CityController extends BaseController {
 
     private CityService cityService;
@@ -34,9 +34,9 @@ public class CityController extends BaseController {
         }
     }
 
-    @GetMapping("/exist")
+    @PostMapping("/exist/{cityName}")
     @ApiOperation("城市是否存在")
-    public StrResponseData isExist(@NotBlank @RequestParam String cityName){
+    public StrResponseData isExist(@NotBlank @PathVariable String cityName){
         if (cityService.isExist(cityName)) {
             return successResponse("城市未存在");
         }else {
@@ -53,15 +53,26 @@ public class CityController extends BaseController {
             return errorResponse("新增失败");
         }
     }
+//
+//    @PostMapping("/{id}")
+//    @ApiOperation("通过id获取城市名称")
+//    public Object getNameById(@PathVariable Long id){
+//        City city = cityService.getNameById(id);
+//        if (city != null) {
+//            return city;
+//        }else {
+//            return errorResponse("获取失败");
+//        }
+//    }
 
-    @PostMapping("/{id}")
-    @ApiOperation("通过id获取城市名称")
-    public Object getNameById(@PathVariable Long id){
-        City city = cityService.getNameById(id);
-        if (city != null) {
-            return city;
+    @PostMapping("/search/{name}")
+    @ApiOperation("通过城市名字搜索城市")
+    public Object searchCity(@NotBlank @PathVariable String name){
+        List<City> cityList = cityService.searchCity(name);
+        if (cityList != null) {
+            return cityList;
         }else {
-            return errorResponse("获取失败");
+            return errorResponse("搜索失败");
         }
     }
 }

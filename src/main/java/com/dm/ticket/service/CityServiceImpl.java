@@ -42,4 +42,11 @@ public class CityServiceImpl implements CityService {
     public City getNameById(Long id) {
         return cityMapper.selectById(id);
     }
+
+    @Override
+    public List<City> searchCity(String name) {
+        QueryWrapper<City> query = new QueryWrapper<>();
+        query.like("name", name);
+        return cityMapper.selectList(query);
+    }
 }

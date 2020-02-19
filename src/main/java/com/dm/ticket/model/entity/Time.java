@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 /**
  * @description 演出时间
  */
-
 @Data
 @Entity
 public class Time {
@@ -21,17 +20,8 @@ public class Time {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
-    /**
-     * 城市id（多对1）
-     */
     @Column(nullable = false)
-    private Long cityId;
-
-    /**
-     * 票档id（1对多）
-     */
-    @Column(nullable = false)
-    private Long ticketId;
+    private Long performId;
 
     @Column(nullable = false)
     private Timestamp time;

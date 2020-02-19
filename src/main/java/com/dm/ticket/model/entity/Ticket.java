@@ -21,6 +21,9 @@ public class Ticket {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
+    @Column(nullable = false)
+    private Long timeId;
+
     /**
      * 价钱
      */

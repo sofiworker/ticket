@@ -1,6 +1,5 @@
 package com.dm.ticket.controller;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Validator;
 import com.dm.ticket.model.StrResponseData;
 import com.dm.ticket.model.dto.ShipDto;

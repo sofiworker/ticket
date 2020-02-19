@@ -7,21 +7,18 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * @description 城市地址
+ * @description 演出艺人/团队
  */
 
 @Data
 @Entity
-public class Location {
+public class Artist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
-    private Long cityId;
-
-    @Column(nullable = false)
-    private String detail;
+    private String name;
 }

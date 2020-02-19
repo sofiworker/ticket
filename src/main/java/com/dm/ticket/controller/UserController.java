@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@Api(produces = "{application/json}", tags = {"用户控制器"})
+@Api(produces = "{application/json}", tags = {"用户"})
 public class UserController extends BaseController {
 
     private UserService service;

@@ -3,11 +3,9 @@ package com.dm.ticket.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 /**
  * @description 演出类别
@@ -17,13 +15,13 @@ import javax.persistence.Lob;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer id = 0;
 
     @Column(nullable = false)
     private String name;
 
-    @Lob
-    @Column(nullable = false)
+    @Column
     private String pic;
 }

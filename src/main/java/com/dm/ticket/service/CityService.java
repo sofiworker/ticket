@@ -14,4 +14,6 @@ public interface CityService {
     boolean isExist(String cityName);
 
     City getNameById(Long id);
+
+    List<City> searchCity(String name);
 }
