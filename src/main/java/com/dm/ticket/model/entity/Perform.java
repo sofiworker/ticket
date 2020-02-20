@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @description 演出
@@ -25,9 +26,11 @@ public class Perform {
      * 演出海报封面
      */
     @Column(nullable = false)
+    @NotBlank
     private String cover;
 
     @Column(nullable = false)
+    @NotBlank
     private String title;
 
     /**
@@ -35,6 +38,7 @@ public class Perform {
      */
     @Lob
     @Column(nullable = false)
+    @NotBlank
     private String content;
 
     /**
@@ -42,6 +46,7 @@ public class Perform {
      */
     @Lob
     @Column(nullable = false)
+    @NotBlank
     private String ticketNotice;
 
     /**
@@ -49,16 +54,17 @@ public class Perform {
      */
     @Lob
     @Column(nullable = false)
+    @NotBlank
     private String viewNotice;
 
     /**
-     * 类别id（1对1）
+     * 类别id
      */
     @Column(nullable = false)
     private Integer categoryId;
 
     /**
-     * 类别子类id（1对1）
+     * 类别子类id
      */
     @Column(nullable = false)
     private Integer subclassId;

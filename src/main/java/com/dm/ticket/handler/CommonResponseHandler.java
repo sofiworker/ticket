@@ -1,6 +1,7 @@
-package com.dm.ticket.exception;
+package com.dm.ticket.handler;
 
 import com.dm.ticket.model.CommonResponseData;
+import com.dm.ticket.model.PageData;
 import com.dm.ticket.model.StrResponseData;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice(annotations = {RestController.class})
-public class CommonResponse implements ResponseBodyAdvice<Object> {
+public class CommonResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
