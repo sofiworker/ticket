@@ -11,4 +11,6 @@ public interface TimeService {
     boolean addNewTime(List<TimeDto> timeList);
 
     List<Time> getTime(Long performId);
+
+    boolean deleteTimes(Long performId);
 }

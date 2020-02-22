@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotEmpty;
-import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -43,6 +42,16 @@ public class TimeController extends BaseController {
             return times;
         }else {
             return errorResponse("获取失败");
+        }
+    }
+
+    @PostMapping("/delete/{performId}")
+    @ApiOperation("通过performId删除times")
+    public StrResponseData deleteTimes(@PathVariable Long performId) {
+        if (timeService.deleteTimes(performId)) {
+            return successResponse("删除成功");
+        }else {
+            return errorResponse("删除失败");
         }
     }
 }

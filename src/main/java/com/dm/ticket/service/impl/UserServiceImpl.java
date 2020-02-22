@@ -1,4 +1,4 @@
-package com.dm.ticket.service;
+package com.dm.ticket.service.impl;
 
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.RandomUtil;
@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.UserMapper;
 import com.dm.ticket.model.dto.*;
 import com.dm.ticket.model.entity.User;
+import com.dm.ticket.service.UserService;
 import com.dm.ticket.util.EncryptUtil;
 import com.dm.ticket.util.JwtUtil;
 import org.springframework.beans.BeanUtils;

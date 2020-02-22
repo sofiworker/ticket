@@ -1,9 +1,10 @@
-package com.dm.ticket.service;
+package com.dm.ticket.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.CategoryMapper;
 import com.dm.ticket.model.dto.CategoryDto;
 import com.dm.ticket.model.entity.Category;
+import com.dm.ticket.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

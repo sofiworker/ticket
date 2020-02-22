@@ -1,7 +1,8 @@
-package com.dm.ticket.service;
+package com.dm.ticket.service.impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
+import com.dm.ticket.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.core.env.Environment;

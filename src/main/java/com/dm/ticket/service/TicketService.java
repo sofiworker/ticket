@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface TicketService {
 
-    boolean addNewTicket(TicketDto dto);
+    boolean addNewTicket(List<TicketDto> dto);
 
     List<Ticket> getTicketDetail(Long timeId);
+
+    boolean deleteTickets(Long performId);
 }

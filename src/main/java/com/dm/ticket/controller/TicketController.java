@@ -25,8 +25,8 @@ public class TicketController extends BaseController {
     }
 
     @PostMapping("/add")
-    @ApiOperation("新增演出票价")
-    public StrResponseData addNewTicket(@Valid @RequestBody TicketDto dto) {
+    @ApiOperation("新增演出票价（演出新增成功后调用）")
+    public StrResponseData addNewTicket(@Valid @RequestBody List<TicketDto> dto) {
         if (service.addNewTicket(dto)) {
             return successResponse("新增成功");
         }else {
@@ -34,14 +34,24 @@ public class TicketController extends BaseController {
         }
     }
 
-    @PostMapping("/detail/{timeId}")
-    @ApiOperation("通过timeId获取票务详情")
-    public Object getTicketByTimeId(@PathVariable Long timeId) {
-        List<Ticket> tickets = service.getTicketDetail(timeId);
+    @PostMapping("/detail/{performId}")
+    @ApiOperation("通过performId获取票务列表")
+    public Object getTicketByTimeId(@PathVariable Long performId) {
+        List<Ticket> tickets = service.getTicketDetail(performId);
         if (tickets != null) {
             return tickets;
         }else {
             return errorResponse("获取失败");
+        }
+    }
+
+    @PostMapping("/delete/{performId}")
+    @ApiOperation("通过performId删除票务列表")
+    public StrResponseData deleteTickets(@PathVariable Long performId){
+        if (service.deleteTickets(performId)) {
+            return successResponse("删除成功");
+        }else {
+            return errorResponse("删除失败");
         }
     }
 }

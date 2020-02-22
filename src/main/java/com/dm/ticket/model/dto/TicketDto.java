@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @Data
 public class TicketDto {
 
-    private Long timeId;
+    private Long performId;
 
     private BigDecimal money;
 

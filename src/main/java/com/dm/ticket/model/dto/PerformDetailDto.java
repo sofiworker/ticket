@@ -4,7 +4,9 @@ import com.dm.ticket.model.entity.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Accessors(chain = true)
@@ -33,4 +35,8 @@ public class PerformDetailDto {
     private Location location;
 
     private List<Time> times;
+
+    private List<Ticket> tickets;
+
+    private Timestamp createTime;
 }

@@ -2,43 +2,36 @@ package com.dm.ticket.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.math.BigDecimal;
+import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 
-/**
- * @description 票档
- */
-
-@Data
 @Entity
-public class Ticket {
+@Data
+public class Comment {
 
+    @JsonIgnore
     @Id
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     @Column(nullable = false)
+    private Long userId;
+
+    @Column(nullable = false)
     private Long performId;
 
-    /**
-     * 价钱
-     */
+    @Lob
     @Column(nullable = false)
-    private BigDecimal money;
+    @NotBlank
+    private String content;
 
-    /**
-     * 票总数
-     */
     @Column(nullable = false)
-    private Integer count;
-
-    /**
-     * 描述
-     */
-    @Column
-    private String description;
+    private Timestamp createTime;
 }

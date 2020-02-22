@@ -2,6 +2,7 @@ package com.dm.ticket.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.dm.ticket.util.TimeUtil;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 
 /**
  * @description 演出
@@ -86,4 +88,7 @@ public class Perform {
      */
     @Column(nullable = false)
     private Long locationId;
+
+    @Column(nullable = false)
+    private Timestamp createTime = TimeUtil.nowTime();
 }

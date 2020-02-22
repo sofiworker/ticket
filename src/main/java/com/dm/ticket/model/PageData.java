@@ -11,5 +11,6 @@ import lombok.experimental.Accessors;
 public class PageData<T> {
 
     private Long curPage;
+    private Long totalPage;
     private T data;
 }

@@ -47,7 +47,7 @@ public class CategoryController extends BaseController {
     }
 
     @PostMapping("/add")
-    @ApiOperation("新增类别")
+    @ApiOperation("新增类别（先查询）")
     public StrResponseData addNewCategory(@Valid @RequestBody CategoryDto dto) {
         if (service.addNewCategory(dto)) {
             return successResponse("新增成功");

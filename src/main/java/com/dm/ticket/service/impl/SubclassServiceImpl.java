@@ -1,8 +1,9 @@
-package com.dm.ticket.service;
+package com.dm.ticket.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.SubclassMapper;
 import com.dm.ticket.model.entity.Subclass;
+import com.dm.ticket.service.SubclassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

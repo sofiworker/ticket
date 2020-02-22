@@ -1,9 +1,10 @@
-package com.dm.ticket.service;
+package com.dm.ticket.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.ShipMapper;
 import com.dm.ticket.model.dto.ShipDto;
 import com.dm.ticket.model.entity.Ship;
+import com.dm.ticket.service.ShipService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
