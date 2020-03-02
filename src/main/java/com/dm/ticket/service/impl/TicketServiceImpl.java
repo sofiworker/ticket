@@ -1,6 +1,5 @@
 package com.dm.ticket.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.TicketMapper;
 import com.dm.ticket.model.dto.TicketDto;
@@ -8,6 +7,7 @@ import com.dm.ticket.model.entity.Ticket;
 import com.dm.ticket.service.TicketService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +35,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Ticket> getTicketDetail(Long performId) {
         QueryWrapper<Ticket> query = new QueryWrapper<>();
         query.eq("perform_id", performId);

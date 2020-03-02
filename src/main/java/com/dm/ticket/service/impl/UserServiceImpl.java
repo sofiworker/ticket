@@ -11,6 +11,7 @@ import com.dm.ticket.util.EncryptUtil;
 import com.dm.ticket.util.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -134,6 +135,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public UserInfoDto getUserInfo(Long uid) {
         User user = userMapper.selectById(uid);
         UserInfoDto dto = new UserInfoDto();

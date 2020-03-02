@@ -8,14 +8,16 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * @description 演出城市
  */
 @Data
 @Entity
-public class City {
+public class City implements Serializable {
 
+    private static final long serialVersionUID = 5010117525696409604L;
     @Id
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;

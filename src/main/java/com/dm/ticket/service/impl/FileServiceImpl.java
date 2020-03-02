@@ -39,6 +39,7 @@ public class FileServiceImpl implements FileService {
         String suffix = split[split.length-1];
         File destFile = new File(path + File.separator + IdUtil.fastSimpleUUID() + "." + suffix);
         file.transferTo(destFile);
+        // TODO: 2020/3/2 该参数
         return "http://" + getLocalhost() + ":" +environment.getProperty("local.server.port")
                 + "/img/" + destFile.getName();
     }

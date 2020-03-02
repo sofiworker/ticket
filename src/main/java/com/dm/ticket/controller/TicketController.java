@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ticket")
-@Api(produces = "application/json", tags = "演出票价（在设置演出时间后调用）")
+@Api(produces = "application/json", tags = "演出票价（在演出新增成功后调用）")
 public class TicketController extends BaseController {
 
     private TicketService service;
@@ -25,7 +25,7 @@ public class TicketController extends BaseController {
     }
 
     @PostMapping("/add")
-    @ApiOperation("新增演出票价（演出新增成功后调用）")
+    @ApiOperation("新增演出票价")
     public StrResponseData addNewTicket(@Valid @RequestBody List<TicketDto> dto) {
         if (service.addNewTicket(dto)) {
             return successResponse("新增成功");

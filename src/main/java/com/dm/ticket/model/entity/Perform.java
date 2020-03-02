@@ -89,6 +89,12 @@ public class Perform {
     @Column(nullable = false)
     private Long locationId;
 
+    /**
+     * 浏览量
+     */
+    @Column(nullable = false)
+    private Integer pageViews = 0;
+
     @Column(nullable = false)
     private Timestamp createTime = TimeUtil.nowTime();
 }

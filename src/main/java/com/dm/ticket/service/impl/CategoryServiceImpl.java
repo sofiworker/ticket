@@ -7,11 +7,14 @@ import com.dm.ticket.model.entity.Category;
 import com.dm.ticket.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryMapper mapper;
@@ -22,6 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Category> getAllCategory() {
         return mapper.selectList(null);
     }
@@ -41,6 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Category> searchCategory(String name) {
         QueryWrapper<Category> query = new QueryWrapper<>();
         query.like("name", name);

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @description 演出艺人/团队
@@ -12,8 +13,9 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Artist {
+public class Artist implements Serializable {
 
+    private static final long serialVersionUID = 8574917887725881453L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(type = IdType.AUTO)

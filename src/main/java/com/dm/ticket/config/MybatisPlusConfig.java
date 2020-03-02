@@ -18,7 +18,7 @@ public class MybatisPlusConfig {
         // 设置最大单页限制数量，默认 500 条，-1 不受限制
 //         paginationInterceptor.setLimit(30);
         // 开启 count 的 join 优化,只针对部分 left join
-        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+//        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
         return paginationInterceptor;
     }
 }

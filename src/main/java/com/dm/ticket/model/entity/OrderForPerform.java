@@ -8,12 +8,15 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
 @Data
-public class Order {
+public class OrderForPerform implements Serializable {
+
+    private static final long serialVersionUID = -2838938274155138563L;
 
     @Id
     @TableId(type = IdType.ASSIGN_ID)
@@ -38,11 +41,19 @@ public class Order {
     private Long performId;
 
     /**
+     * 票务id
+     */
+    @Column(nullable = false)
+    private Long ticketId;
+
+    /**
      * 下单个数
      */
     @Column(nullable = false)
     private Integer count;
 
+    /**总金额
+     */
     @Column(nullable = false)
     private BigDecimal money;
 
@@ -50,10 +61,12 @@ public class Order {
      * 订单状态
      * 0：待支付
      * 1：成功
-     * 2：失败
+     * 2：取消订单
+     * 3：退款成功
+     * 4：退款异常
      */
     @Column(nullable = false)
-    private Integer state;
+    private Integer state = 0;
 
     /**
      * 创建订单时间

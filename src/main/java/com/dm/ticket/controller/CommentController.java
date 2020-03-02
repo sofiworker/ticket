@@ -29,7 +29,7 @@ public class CommentController extends BaseController {
     public StrResponseData addNewComment(@RequestBody Comment comment) {
         if (service.addNewComment(comment)) {
             return successResponse("新增成功");
-        }else {
+        } else {
             return errorResponse("新增失败");
         }
     }
@@ -40,8 +40,18 @@ public class CommentController extends BaseController {
         PageData<List<CommentDto>> pageData = service.getComments(performId, pageNum);
         if (pageData != null && pageData.getData() != null) {
             return pageData;
-        }else {
+        } else {
             return errorResponse("获取失败");
+        }
+    }
+
+    @GetMapping("/able")
+    @ApiOperation("查询用户是否能进行评论")
+    public StrResponseData ableComment(@RequestParam Long performId, @RequestParam Long userId){
+        if (service.ableComment(performId, userId)) {
+            return successResponse("可以评论");
+        }else {
+            return errorResponse("不能评论");
         }
     }
 }

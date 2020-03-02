@@ -5,6 +5,7 @@ import com.dm.ticket.mapper.CityMapper;
 import com.dm.ticket.model.entity.City;
 import com.dm.ticket.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<City> getCityList() {
         return cityMapper.selectList(null);
     }
@@ -45,6 +47,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<City> searchCity(String name) {
         QueryWrapper<City> query = new QueryWrapper<>();
         query.like("name", name);

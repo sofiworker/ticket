@@ -1,0 +1,38 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="
+            http://www.ehcache.org/v3
+            http://www.ehcache.org/schema/ehcache-core-3.7.xsd">
+
+
+
+    <!-- 持久缓存目录 persistence(持久性标记) 在持久性标记中，我们为硬盘(磁盘存储)上基于文件的缓存定义了目录。这只是文件夹的定义。-->
+    <persistence directory="cache" />
+
+    <!-- Default cache template -->
+    <cache-template name="default">
+        <expiry>
+            <!--生存时间指定缓存条目独立于访问可以在缓存中保留多长时间。指定的时间过期后，将从缓存中删除该值。 -->
+            <ttl>3600</ttl>
+        </expiry>
+        <resources>
+            <!-- 配置缓存的层和容量。 -->
+            <heap>1000</heap>
+            <!-- 对于堆上存储，我们配置了1,000个缓存条目的容量。这是开始删除缓存之前的最大条目数。 -->
+            <offheap unit="MB">10</offheap>
+            <!-- 对于堆外存储，我们配置了10mb的容量。 -->
+            <disk persistent="true" unit="MB">20</disk>
+            <!-- 作为磁盘缓存，我们配置了20mb 磁盘缓存必须始终具有比堆缓存更高的内存容量，否则应用程序在解析XML文件时在应用程序启动时抛出异常。 -->
+        </resources>
+    </cache-template>
+
+    <!-- Cache configuration -->
+    <cache alias="ticketCache" uses-template="default">
+        <!-- 使用上面配置的模版 -->
+    </cache>
+    <cache alias="default" uses-template="default">
+
+    </cache>
+
+</config>

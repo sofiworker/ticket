@@ -5,11 +5,14 @@ import com.dm.ticket.mapper.SubclassMapper;
 import com.dm.ticket.model.entity.Subclass;
 import com.dm.ticket.service.SubclassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SubclassServiceImpl implements SubclassService {
 
     private SubclassMapper mapper;
@@ -20,6 +23,7 @@ public class SubclassServiceImpl implements SubclassService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Subclass> getAllById(Integer id) {
         QueryWrapper<Subclass> query = new QueryWrapper<>();
         query.eq("category_id", id);
@@ -42,6 +46,7 @@ public class SubclassServiceImpl implements SubclassService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Subclass> searchSubclass(Integer id, String name) {
         QueryWrapper<Subclass> query = new QueryWrapper<>();
         query.eq("category_id", id).like("name", name);

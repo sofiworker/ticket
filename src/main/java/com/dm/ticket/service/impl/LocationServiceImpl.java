@@ -5,6 +5,7 @@ import com.dm.ticket.mapper.LocationMapper;
 import com.dm.ticket.model.entity.Location;
 import com.dm.ticket.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Location> getAllLocation(Long id) {
         QueryWrapper<Location> query = new QueryWrapper<>();
         query.eq("city_id", id);
@@ -43,6 +45,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Location> searchLocation(Long cityId, String detail) {
         QueryWrapper<Location> query = new QueryWrapper<>();
         query.eq("city_id", cityId).like("detail", detail);

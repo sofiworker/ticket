@@ -4,6 +4,7 @@ import com.dm.ticket.model.PageData;
 import com.dm.ticket.model.StrResponseData;
 import com.dm.ticket.model.dto.PerformDetailDto;
 import com.dm.ticket.model.dto.PerformDto;
+import com.dm.ticket.model.dto.PerformOverview;
 import com.dm.ticket.model.dto.PerformThumbnail;
 import com.dm.ticket.model.entity.City;
 import com.dm.ticket.model.entity.Perform;
@@ -74,9 +75,11 @@ public class PerformController extends BaseController {
     }
 
     @PostMapping("/all/{pageNum}")
-    @ApiOperation("获取演出缩略列表（含分页，每页30条，起始页为1，超出页数返回第一页数据）")
-    public Object getAllPerformByPage(@PathVariable Long pageNum) {
-        PageData<List<PerformThumbnail>> pageData = performService.getAllPerformByPage(pageNum);
+    @ApiOperation("获取演出缩略列表，按浏览数排序（含分页，每页30条，起始页为1，超出页数返回第一页数据）")
+    public Object getAllPerformByPage(@PathVariable Long pageNum,
+                                      @RequestParam(defaultValue = "0") Integer orderType,
+                                      @RequestBody(required = false) Map<String, Long> conditions) {
+        PageData<List<PerformThumbnail>> pageData = performService.getAllPerformByPage(pageNum, orderType, conditions);
         if (pageData != null && pageData.getData() != null) {
             return pageData;
         }else {
@@ -84,7 +87,20 @@ public class PerformController extends BaseController {
         }
     }
 
-    @PostMapping("/{categoryId}")
+    @PostMapping("/{pageNum}")
+    @ApiOperation("分页获取演出")
+    public Object getPerform(@PathVariable Long pageNum,
+                             @RequestParam(defaultValue = "0") Integer orderType,
+                             @RequestBody(required = false) Map<String, Long> conditions){
+        PageData<List<PerformOverview>> pageData = performService.getPerform(pageNum, orderType, conditions);
+        if (pageData != null && pageData.getData() != null) {
+            return pageData;
+        }else {
+            return errorResponse("获取失败");
+        }
+    }
+
+    @PostMapping("/recommend/{categoryId}")
     @ApiOperation("通过类别id获取近期7场演出")
     public Object getRecommend(@PathVariable Integer categoryId) {
         List<PerformThumbnail> performList = performService.getRecommendList(categoryId);
@@ -95,11 +111,14 @@ public class PerformController extends BaseController {
         }
     }
 
-    @PostMapping("/search/{str}")
-    @ApiOperation("搜索演出（明星/演出名字）（含分页，每页30条，起始页为1，超出页数返回第一页数据）")
+    @PostMapping("/search/{pageNum}/{str}")
+    @ApiOperation("搜索演出（明星/演出名字），按浏览数排序（含分页，每页30条，起始页为1，超出页数返回第一页数据）")
     public Object searchPerform(@PathVariable Long pageNum,
-                                @NotBlank @PathVariable String str) {
-        PageData<List<PerformThumbnail>> pageData = performService.searchPerform(pageNum, str);
+                                @NotBlank @PathVariable String str,
+                                @RequestParam(defaultValue = "0") Integer orderType,
+                                @RequestBody(required = false) Map<String, Object> conditions) {
+        PageData<List<PerformThumbnail>> pageData = performService.searchPerform(pageNum, str,
+                orderType, conditions);
         if (pageData != null && pageData.getData() != null) {
             return pageData;
         }else {
@@ -115,6 +134,16 @@ public class PerformController extends BaseController {
             return map;
         }else {
             return errorResponse("获取失败");
+        }
+    }
+
+    @PostMapping("/{performId}/views")
+    @ApiOperation("添加演出浏览数")
+    public StrResponseData addViewPages(@PathVariable Long performId){
+        if (performService.addViewPages(performId)) {
+            return successResponse("新增成功");
+        }else {
+            return errorResponse("新增失败");
         }
     }
 }

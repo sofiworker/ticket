@@ -1,17 +1,19 @@
 package com.dm.ticket.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dm.ticket.mapper.ShipMapper;
 import com.dm.ticket.model.dto.ShipDto;
 import com.dm.ticket.model.entity.Ship;
 import com.dm.ticket.service.ShipService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ShipServiceImpl implements ShipService {
 
     private ShipMapper shipMapper;
@@ -39,6 +41,7 @@ public class ShipServiceImpl implements ShipService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<ShipDto> getShipList(Long uid) {
         return shipMapper.selectListByUid(uid);
     }

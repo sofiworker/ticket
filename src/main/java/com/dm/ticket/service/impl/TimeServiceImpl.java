@@ -8,6 +8,7 @@ import com.dm.ticket.service.TimeService;
 import com.dm.ticket.util.SnowflakeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class TimeServiceImpl implements TimeService {
     }
 
     @Override
+    @Cacheable(value = "default", keyGenerator = "cacheKeyGenerator")
     public List<Time> getTime(Long performId) {
         QueryWrapper<Time> query = new QueryWrapper<>();
         query.eq("perform_id", performId);
